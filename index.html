@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCL Lab Cup 2026</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #dce2ea;
+      --soft: #f8fafc;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --green: #16a34a;
+      --yellow: #ca8a04;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      padding: 24px 32px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 30px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .two-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 700;
+      background: #fafafa;
+    }
+
+    input {
+      width: 52px;
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .leaderboard {
+      display: grid;
+      gap: 10px;
+    }
+
+    .rank-card {
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfe;
+    }
+
+    .rank-card:first-child {
+      border-color: #9bbcf8;
+      background: #f3f7ff;
+    }
+
+    .rank-number {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e8eefc;
+      color: #1e40af;
+      font-weight: 800;
+    }
+
+    .points {
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .progress {
+      width: 100%;
+      height: 7px;
+      margin-top: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e5e7eb;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: #2563eb;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .red { background: var(--red); }
+    .blue { background: var(--blue); }
+    .green { background: var(--green); }
+    .yellow { background: var(--yellow); }
+
+    .small {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #eef4ff, #ffffff);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .team-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--soft);
+    }
+
+    .award-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .award-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: linear-gradient(135deg, #ffffff, #f8fbff);
+    }
+
+    .award-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 5px;
+      height: 100%;
+      background: #2563eb;
+    }
+
+    .award-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .award-winner {
+      margin-top: 8px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .award-reason {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 6px;
+    }
+
+    .highlight-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .highlight {
+      border-left: 4px solid #2563eb;
+      padding: 10px 12px;
+      background: var(--soft);
+      border-radius: 6px;
+    }
+
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .rule {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .rule strong {
+      display: block;
+      font-size: 22px;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        padding: 20px 16px;
+      }
+
+      main {
+        padding: 16px;
+      }
+
+      .top-grid,
+      .two-grid,
+      .team-grid,
+      .award-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rules-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CCL Lab Cup 2026</h1>
+    <div class="subtitle">Friendly sports and mind games tournament for lab bonding</div>
+  </header>
+
+  <main>
+    <div class="top-grid">
+      <section>
+        <h2>Current Leaderboard</h2>
+        <div id="leaderboard" class="leaderboard"></div>
+      </section>
+
+      <section>
+        <h2>This Week</h2>
+        <div id="thisWeek" class="hero-card"></div>
+      </section>
+    </div>
+
+    <section>
+      <h2>Weekly Schedule</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Week</th>
+            <th>Activity</th>
+            <th>Format</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="scheduleBody"></tbody>
+      </table>
+    </section>
+
+    <div class="two-grid">
+      <section>
+        <h2>Weekly Results</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Activity</th>
+              <th>1st</th>
+              <th>2nd</th>
+              <th>3rd</th>
+              <th>4th</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Weekly Score</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>W1</th>
+              <th>W2</th>
+              <th>W3</th>
+              <th>W4</th>
+              <th>W5</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="scoreInputBody"></tbody>
+        </table>
+        <div class="small">
+          Update the score in Google Sheet. This website reads the published CSV data and refreshes the ranking.
+        </div>
+      </section>
+    </div>
+
+    <section>
+      <h2>Teams</h2>
+      <div id="teamCards" class="team-grid"></div>
+    </section>
+
+    <section>
+      <h2>Awards</h2>
+      <div id="awards" class="award-grid"></div>
+    </section>
+
+    <div class="two-grid">
+      <section>
+        <h2>Rules</h2>
+        <div class="rules-grid">
+          <div class="rule"><strong>4</strong>1st place</div>
+          <div class="rule"><strong>3</strong>2nd place</div>
+          <div class="rule"><strong>2</strong>3rd place</div>
+          <div class="rule"><strong>1</strong>4th place</div>
+        </div>
+        <div class="small">
+          Football is treated as a monthly social activity and is not included in tournament points.
+        </div>
+      </section>
+
+      <section>
+        <h2>Highlights</h2>
+        <div id="highlights" class="highlight-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Paste your published Google Sheet CSV link here.
+    // Example format:
+    // https://docs.google.com/spreadsheets/d/e/XXXX/pub?gid=0&single=true&output=csv
+    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSBVaNXxIWBfmRBhUxSrBeH-dCrjAu-CDa7yKDyUhKvxfjmiw6Dv7aww7SNF1c3an6R5Qv4PmZOqqwf/pub?gid=0&single=true&output=csv";
+    const SHEET_GVIZ_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSBVaNXxIWBfmRBhUxSrBeH-dCrjAu-CDa7yKDyUhKvxfjmiw6Dv7aww7SNF1c3an6R5Qv4PmZOqqwf/gviz/tq?tqx=out:json&gid=0";
+
+    // Fallback data. The website uses this data until you paste a Google Sheet CSV link above.
+    let teams = [
+      {
+        name: "Red Team",
+        color: "red",
+        members: ["Khanh", "Somik", "Kamada", "Sora"],
+        scores: [4, 3, 2, 0, 0]
+      },
+      {
+        name: "Blue Team",
+        color: "blue",
+        members: ["Cuong", "Sojib", "Luan", "Toshiya"],
+        scores: [3, 4, 3, 0, 0]
+      },
+      {
+        name: "Green Team",
+        color: "green",
+        members: ["Zalita", "Koki", "Sota", "Hikaru"],
+        scores: [2, 2, 4, 0, 0]
+      },
+      {
+        name: "Yellow Team",
+        color: "yellow",
+        members: ["Yuma", "Hung", "Sota Ohashi", "Yugo", "Rynosuke"],
+        scores: [1, 1, 1, 0, 0]
+      }
+    ];
+
+    const formatByActivity = {
+      "badminton": "Team match: 2 doubles + tie-break",
+      "table tennis": "Team match: 2 singles + 1 doubles",
+      "running": "All members run, score by average",
+      "basketball shooting": "All members shoot, score by average",
+      "draw and guess": "All members rotate",
+      "quiz": "All-team quiz",
+      "quiz night": "All-team quiz"
+    };
+
+    // Fallback schedule. If Google Sheet headers include activity names, this schedule is updated automatically.
+    let schedule = [
+      { week: "Week 1", activity: "Badminton", format: "Team match: 2 doubles + tie-break", status: "Finished" },
+      { week: "Week 2", activity: "Table Tennis", format: "Team match: 2 doubles + tie-break", status: "Finished" },
+      { week: "Week 3", activity: "Running", format: "All members run, score by average", status: "Finished" },
+      { week: "Week 4", activity: "Basketball Shooting", format: "All members shoot, score by average", status: "This week" },
+      { week: "Week 5", activity: "Draw and Guess", format: "All members rotate", status: "Upcoming" }
+    ];
+
+    // Modify highlights here.
+    const highlights = [
+      { title: "MVP of Week 1", text: "Red Team showed strong teamwork in badminton." },
+      { title: "Best Comeback", text: "Blue Team moved close to the top after table tennis." },
+      { title: "Best Team Spirit", text: "All teams joined the run actively." }
+    ];
+
+    // Modify awards here. These awards are for fun and do not change tournament points.
+    const awards = [
+      { title: "MVP of the Week", winner: "To be announced", reason: "For the most impressive individual performance this week." },
+      { title: "Best Team Spirit", winner: "To be announced", reason: "For cheering, helping, and keeping the game friendly." },
+      { title: "Comeback Moment", winner: "To be announced", reason: "For the best recovery or surprise result of the week." }
+    ];
+
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let field = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i += 1) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (char === '"' && inQuotes && nextChar === '"') {
+          field += '"';
+          i += 1;
+        } else if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === "," && !inQuotes) {
+          row.push(field);
+          field = "";
+        } else if ((char === "\n" || char === "\r") && !inQuotes) {
+          if (field || row.length) {
+            row.push(field);
+            rows.push(row);
+            row = [];
+            field = "";
+          }
+          if (char === "\r" && nextChar === "\n") {
+            i += 1;
+          }
+        } else {
+          field += char;
+        }
+      }
+
+      if (field || row.length) {
+        row.push(field);
+        rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function parseWeekHeader(headerText) {
+      const text = String(headerText || "").trim();
+      const match = text.match(/^W(?:eek)?\s*(\d+)(?:\s*[-:]\s*(.+))?$/i);
+
+      if (!match) {
+        return null;
+      }
+
+      return {
+        number: Number(match[1]),
+        week: `Week ${match[1]}`,
+        activity: (match[2] || "").trim()
+      };
+    }
+
+    function inferFormat(activity) {
+      const key = String(activity || "").trim().toLowerCase();
+      return formatByActivity[key] || "Friendly team activity";
+    }
+
+    function updateScheduleFromSheet(weekColumns, loadedTeams) {
+      if (!weekColumns.length) {
+        return;
+      }
+
+      const firstUnfinishedIndex = weekColumns.findIndex((weekColumn, index) => {
+        return loadedTeams.every(team => Number(team.scores[index] || 0) === 0);
+      });
+
+      schedule = weekColumns.map((weekColumn, index) => {
+        const fallback = schedule[index] || {};
+        const activity = weekColumn.activity || fallback.activity || weekColumn.week;
+        const hasScore = loadedTeams.some(team => Number(team.scores[index] || 0) > 0);
+        const status = hasScore ? "Finished" : index === firstUnfinishedIndex ? "This week" : "Upcoming";
+
+        return {
+          week: weekColumn.week,
+          activity,
+          format: inferFormat(activity),
+          status
+        };
+      });
+    }
+
+    function teamsFromRows(inputRows) {
+      const rows = inputRows.filter(row => row.some(cell => String(cell).trim() !== ""));
+      const header = rows[0].map(cell => cell.trim());
+      const weekIndexes = header
+        .map((name, index) => ({ name, index }))
+        .map(item => ({ ...item, parsed: parseWeekHeader(item.name) }))
+        .filter(item => item.parsed);
+
+      const loadedTeams = rows.slice(1).map(row => {
+        const get = columnName => {
+          const index = header.findIndex(item => item.toLowerCase() === columnName.toLowerCase());
+          return index >= 0 ? (row[index] || "").trim() : "";
+        };
+
+        return {
+          name: get("Team") || "Unnamed Team",
+          color: get("Color") || "blue",
+          members: get("Members").split(";").map(item => item.trim()).filter(Boolean),
+          scores: weekIndexes.map(item => Number(row[item.index] || 0))
+        };
+      });
+
+      updateScheduleFromSheet(weekIndexes.map(item => item.parsed), loadedTeams);
+      return loadedTeams;
+    }
+
+    function teamsFromCsv(csvText) {
+      return teamsFromRows(parseCsv(csvText));
+    }
+
+    function rowsFromGvizResponse(response) {
+      const table = response.table;
+      const header = table.cols.map(col => col.label || col.id || "");
+      const body = table.rows.map(row => {
+        return row.c.map(cell => {
+          if (!cell) {
+            return "";
+          }
+          return cell.f || cell.v || "";
+        });
+      });
+
+      return [header, ...body];
+    }
+
+    function loadTeamsWithGviz() {
+      return new Promise((resolve, reject) => {
+        const previousGoogle = window.google;
+        const script = document.createElement("script");
+        const timeout = window.setTimeout(() => {
+          cleanup();
+          reject(new Error("Google Sheet loading timed out."));
+        }, 10000);
+
+        function cleanup() {
+          window.clearTimeout(timeout);
+          script.remove();
+          window.google = previousGoogle;
+        }
+
+        window.google = {
+          visualization: {
+            Query: {
+              setResponse(response) {
+                cleanup();
+                resolve(teamsFromRows(rowsFromGvizResponse(response)));
+              }
+            }
+          }
+        };
+
+        script.onerror = () => {
+          cleanup();
+          reject(new Error("Could not load Google Sheet with gviz."));
+        };
+
+        script.src = `${SHEET_GVIZ_URL}&cacheBust=${Date.now()}`;
+        document.head.appendChild(script);
+      });
+    }
+
+    async function loadTeamsFromGoogleSheet() {
+      if (!SHEET_CSV_URL) {
+        return;
+      }
+
+      let loadedFromGviz = false;
+
+      try {
+        teams = await loadTeamsWithGviz();
+        loadedFromGviz = true;
+      } catch (gvizError) {
+        console.warn(gvizError);
+      }
+
+      if (loadedFromGviz) {
+        return;
+      }
+
+      try {
+        const separator = SHEET_CSV_URL.includes("?") ? "&" : "?";
+        const response = await fetch(`${SHEET_CSV_URL}${separator}cacheBust=${Date.now()}`);
+        if (!response.ok) {
+          throw new Error(`Could not load sheet: ${response.status}`);
+        }
+        const csvText = await response.text();
+        teams = teamsFromCsv(csvText);
+      } catch (error) {
+        console.error(error);
+        alert("Could not load Google Sheet data. The website is showing fallback data.");
+      }
+    }
+
+    function total(team) {
+      return team.scores.reduce((sum, value) => sum + Number(value || 0), 0);
+    }
+
+    function findTeam(name) {
+      return teams.find(team => team.name === name);
+    }
+
+    function renderLeaderboard() {
+      const board = document.getElementById("leaderboard");
+      board.innerHTML = "";
+
+      const ranked = [...teams].sort((a, b) => total(b) - total(a));
+      const maxPoints = Math.max(...ranked.map(team => total(team)), 1);
+
+      ranked.forEach((team, index) => {
+        const status =
+          index === 0 ? "Current leader" :
+          index === 1 ? "Close race" :
+          index === 2 ? "Still possible" :
+          "Comeback needed";
+        const progress = Math.round((total(team) / maxPoints) * 100);
+
+        const card = document.createElement("div");
+        card.className = "rank-card";
+        card.innerHTML = `
+          <div class="rank-number">${index + 1}</div>
+          <div>
+            <div><span class="tag ${team.color}">${team.name}</span></div>
+            <div class="small">${status}</div>
+            <div class="progress"><div class="progress-fill ${team.color}" style="width: ${progress}%"></div></div>
+          </div>
+          <div class="points">${total(team)}</div>
+        `;
+        board.appendChild(card);
+      });
+    }
+
+    function renderThisWeek() {
+      const current = schedule.find(item => item.status === "This week") || schedule[0];
+      const box = document.getElementById("thisWeek");
+      box.innerHTML = `
+        <div class="hero-title">${current.activity}</div>
+        <div>${current.week}</div>
+        <div class="small">${current.format}</div>
+        <div class="button-row">
+          <span class="pill">Friendly competition</span>
+          <span class="pill">All members join</span>
+          <span class="pill">Rank: 4-3-2-1</span>
+        </div>
+      `;
+    }
+
+    function renderSchedule() {
+      const body = document.getElementById("scheduleBody");
+      body.innerHTML = "";
+
+      schedule.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.week}</td>
+          <td><strong>${item.activity}</strong></td>
+          <td>${item.format}</td>
+          <td>${item.status}</td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    function renderWeeklyResults() {
+      const body = document.getElementById("resultsBody");
+      body.innerHTML = "";
+
+      schedule.forEach((item, weekIndex) => {
+        const ranked = [...teams]
+          .filter(team => Number(team.scores[weekIndex] || 0) > 0)
+          .sort((a, b) => Number(b.scores[weekIndex] || 0) - Number(a.scores[weekIndex] || 0));
+
+        const rankCells = ranked.map(team => {
+          return `<span class="tag ${team.color}">${team.name}</span>`;
+        });
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.week}</td>
+          <td>${item.activity}</td>
+          <td>${rankCells[0] || "-"}</td>
+          <td>${rankCells[1] || "-"}</td>
+          <td>${rankCells[2] || "-"}</td>
+          <td>${rankCells[3] || "-"}</td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    function renderScoreInput() {
+      const body = document.getElementById("scoreInputBody");
+      body.innerHTML = "";
+
+      teams.forEach((team, teamIndex) => {
+        const tr = document.createElement("tr");
+
+        const nameTd = document.createElement("td");
+        nameTd.innerHTML = `<span class="tag ${team.color}">${team.name}</span>`;
+        tr.appendChild(nameTd);
+
+        for (let weekIndex = 0; weekIndex < schedule.length; weekIndex += 1) {
+          const score = team.scores[weekIndex] || 0;
+          const td = document.createElement("td");
+          td.textContent = score;
+          tr.appendChild(td);
+        }
+
+        const totalTd = document.createElement("td");
+        totalTd.innerHTML = `<strong>${total(team)}</strong>`;
+        tr.appendChild(totalTd);
+
+        body.appendChild(tr);
+      });
+    }
+
+    function renderTeams() {
+      const container = document.getElementById("teamCards");
+      container.innerHTML = "";
+
+      teams.forEach(team => {
+        const card = document.createElement("div");
+        card.className = "team-card";
+        card.innerHTML = `
+          <div><span class="tag ${team.color}">${team.name}</span></div>
+          <div class="small">${team.members.join(", ")}</div>
+          <div style="margin-top: 10px;"><strong>${total(team)} points</strong></div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderHighlights() {
+      const container = document.getElementById("highlights");
+      container.innerHTML = "";
+
+      highlights.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "highlight";
+        div.innerHTML = `<strong>${item.title}</strong><div class="small">${item.text}</div>`;
+        container.appendChild(div);
+      });
+    }
+
+    function renderAwards() {
+      const container = document.getElementById("awards");
+      container.innerHTML = "";
+
+      awards.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "award-card";
+        div.innerHTML = `
+          <div class="award-label">${item.title}</div>
+          <div class="award-winner">${item.winner}</div>
+          <div class="award-reason">${item.reason}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function renderAll() {
+      renderLeaderboard();
+      renderThisWeek();
+      renderSchedule();
+      renderWeeklyResults();
+      renderScoreInput();
+      renderTeams();
+      renderAwards();
+      renderHighlights();
+    }
+
+    loadTeamsFromGoogleSheet().then(renderAll);
+  </script>
+</body>
+</html>

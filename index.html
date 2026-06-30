@@ -480,7 +480,7 @@
     const highlights = [
       { title: "MVP of Week 1", text: "Kamada from the Red Team showed strong in table tennis" },
       { title: "Best Comeback", text: "Blue Team moved close to the top after table tennis." },
-      { title: "Best Team Spirit", text: "All teams joined the run actively." }
+      { title: "Best Team Spirit", text: "All teams joined the game actively." }
     ];
 
     // Modify awards here. These awards are for fun and do not change tournament points.
@@ -728,7 +728,7 @@
 
     function renderThisWeek() {
       const current = schedule.find(item => item.status === "Upcoming Sport") || schedule[0];
-      const box = document.getElementById("thisWeek");
+      const box = document.getElementById("Upcoming");
       box.innerHTML = `
         <div class="hero-title">${current.activity}</div>
         <div>${current.week}</div>

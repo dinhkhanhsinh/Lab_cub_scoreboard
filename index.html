@@ -727,7 +727,7 @@
     }
 
     function renderThisWeek() {
-      const current = schedule.find(item => item.status === "This week") || schedule[0];
+      const current = schedule.find(item => item.status === "Upcoming Sport") || schedule[0];
       const box = document.getElementById("thisWeek");
       box.innerHTML = `
         <div class="hero-title">${current.activity}</div>
@@ -736,7 +736,7 @@
         <div class="button-row">
           <span class="pill">Friendly competition</span>
           <span class="pill">All members join</span>
-          <span class="pill">Rank: 4-3-2-1</span>
+          <span class="pill">Rank: 3-2-1</span>
         </div>
       `;
     }

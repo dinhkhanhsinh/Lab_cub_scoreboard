@@ -728,7 +728,7 @@
 
     function renderThisWeek() {
       const current = schedule.find(item => item.status === "Upcoming Sport") || schedule[0];
-      const box = document.getElementById("Upcoming");
+      const box = document.getElementById("This week");
       box.innerHTML = `
         <div class="hero-title">${current.activity}</div>
         <div>${current.week}</div>

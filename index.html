@@ -564,8 +564,7 @@
         const fallback = schedule[index] || {};
         const activity = weekColumn.activity || fallback.activity || weekColumn.week;
         const hasScore = loadedTeams.some(team => Number(team.scores[index] || 0) > 0);
-        const status = hasScore ? "Finished" : index === firstUnfinishedIndex ? "This week" : "Upcoming";
-
+        const status = hasScore ? "Finished" : "Upcoming";
         return {
           week: weekColumn.week,
           activity,

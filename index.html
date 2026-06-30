@@ -726,19 +726,23 @@
     }
 
     function renderThisWeek() {
-      const current = schedule.find(item => item.status === "Upcoming Sport") || schedule[0];
-      const box = document.getElementById("thisWeek");
-      box.innerHTML = `
-        <div class="hero-title">${current.activity}</div>
-        <div>${current.week}</div>
-        <div class="small">${current.format}</div>
-        <div class="button-row">
-          <span class="pill">Friendly competition</span>
-          <span class="pill">All members join</span>
-          <span class="pill">Rank: 3-2-1</span>
-        </div>
-      `;
-    }
+  const current =
+    schedule.find(item => String(item.status).trim().toLowerCase() === "upcoming") ||
+    schedule.find(item => String(item.status).trim().toLowerCase() !== "finished") ||
+    schedule[0];
+
+  const box = document.getElementById("thisWeek");
+  box.innerHTML = `
+    <div class="hero-title">${current.activity}</div>
+    <div>${current.week}</div>
+    <div class="small">${current.format}</div>
+    <div class="button-row">
+      <span class="pill">Friendly competition</span>
+      <span class="pill">All members join</span>
+      <span class="pill">Rank: 3-2-1</span>
+    </div>
+  `;
+}
 
     function renderSchedule() {
       const body = document.getElementById("scheduleBody");
